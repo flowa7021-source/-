@@ -123,7 +123,7 @@ The repository includes a root workflow at `.github/workflows/windows-installer.
 
 Important: the workflow file must be in the repository root `.github/workflows/` directory (nested `.github` folders are ignored by GitHub Actions).
 
-1. Checks out the repository and recursively auto-detects the project directory containing `scripts/build.ps1`
+1. Checks out the repository, first tries root `scripts/build.ps1`, then recursively auto-detects nested project directories
 2. Bootstraps `vcpkg` (reuses existing checkout on reruns) and exposes `VCPKG_ROOT`
 3. Installs Inno Setup 6
 4. Runs `scripts/build.ps1 -Installer` (Release build + Inno Setup package)
