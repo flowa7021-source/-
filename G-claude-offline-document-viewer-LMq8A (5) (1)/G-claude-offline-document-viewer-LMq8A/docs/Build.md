@@ -116,6 +116,25 @@ cpack -G ZIP          # Portable ZIP
 - Clean uninstall from Control Panel
 - 64-bit only, requires Windows 10+
 
+
+## GitHub Actions: full installer pipeline
+
+The repository includes a root workflow at `.github/workflows/windows-installer.yml` that runs the complete Windows packaging cycle:
+
+Important: the workflow file must be in the repository root `.github/workflows/` directory (nested `.github` folders are ignored by GitHub Actions).
+
+1. Checks out the repository and enters the project directory
+2. Bootstraps `vcpkg` and exposes `VCPKG_ROOT`
+3. Installs Inno Setup 6
+4. Runs `scripts/build.ps1 -Installer` (Release build + Inno Setup package)
+5. Uploads `build/installer/*.exe` as a workflow artifact
+6. Attaches the installer to GitHub Releases for tag/release runs
+
+Triggers:
+- `workflow_dispatch` (manual)
+- git tags matching `v*`
+- published GitHub Release
+
 ## Portable distribution
 
 Create a portable package using the build script:
