@@ -116,6 +116,17 @@ cpack -G ZIP          # Portable ZIP
 - Clean uninstall from Control Panel
 - 64-bit only, requires Windows 10+
 
+
+## GitHub Actions: automatic Windows installer
+
+The repository now includes a workflow at `.github/workflows/windows-installer.yml` that:
+
+1. Builds the project on `windows-2022` with vcpkg dependencies
+2. Compiles `installer/docvision.iss` via Inno Setup
+3. Uploads `build/installer/*.exe` as an artifact
+
+It runs manually (`workflow_dispatch`) and automatically for version tags (`v*`).
+
 ## Portable distribution
 
 Create a portable package using the build script:
