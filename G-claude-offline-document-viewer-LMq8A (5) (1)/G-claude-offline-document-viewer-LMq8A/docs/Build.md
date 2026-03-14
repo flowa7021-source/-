@@ -123,12 +123,13 @@ The repository includes a root workflow at `.github/workflows/windows-installer.
 
 Important: the workflow file must be in the repository root `.github/workflows/` directory (nested `.github` folders are ignored by GitHub Actions).
 
-1. Checks out the repository and enters the project directory
+1. Checks out the repository and auto-detects the project directory containing `scripts/build.ps1`
 2. Bootstraps `vcpkg` and exposes `VCPKG_ROOT`
 3. Installs Inno Setup 6
 4. Runs `scripts/build.ps1 -Installer` (Release build + Inno Setup package)
-5. Uploads `build/installer/*.exe` as a workflow artifact
-6. Attaches the installer to GitHub Releases for tag/release runs
+5. Verifies that `build/installer/*.exe` was produced
+6. Uploads installer files as a workflow artifact
+7. Attaches the installer to GitHub Releases for tag/release runs
 
 Triggers:
 - `workflow_dispatch` (manual)
