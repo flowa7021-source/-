@@ -20,20 +20,22 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Detect project directory
-        id: project
         shell: pwsh
         run: |
-          $candidate = Get-ChildItem -Path $env:GITHUB_WORKSPACE -Directory |
-            Where-Object { Test-Path (Join-Path $_.FullName 'scripts\build.ps1') } |
+          $buildScript = Get-ChildItem -Path $env:GITHUB_WORKSPACE -Filter build.ps1 -File -Recurse |
+            Where-Object { $_.FullName -match '[\\/]scripts[\\/]build\.ps1$' } |
+            Sort-Object FullName |
             Select-Object -First 1
 
-          if (-not $candidate) {
-            Write-Error "Could not find project directory containing scripts/build.ps1"
+          if (-not $buildScript) {
+            Write-Error "Could not find scripts/build.ps1 under $env:GITHUB_WORKSPACE"
+            exit 1
           }
 
-          "PROJECT_DIR=$($candidate.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          "project_dir=$($candidate.FullName)" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
-          Write-Host "Detected project dir: $($candidate.FullName)"
+          $projectDir = Split-Path -Parent (Split-Path -Parent $buildScript.FullName)
+          "PROJECT_DIR=$projectDir" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          Write-Host "Detected build script: $($buildScript.FullName)"
+          Write-Host "Detected project dir: $projectDir"
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
@@ -41,9 +43,12 @@ jobs:
       - name: Setup vcpkg
         shell: pwsh
         run: |
-          git clone https://github.com/microsoft/vcpkg.git "$env:USERPROFILE\vcpkg"
-          & "$env:USERPROFILE\vcpkg\bootstrap-vcpkg.bat"
-          "VCPKG_ROOT=$env:USERPROFILE\vcpkg" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          $vcpkgRoot = Join-Path $env:USERPROFILE 'vcpkg'
+          if (-not (Test-Path $vcpkgRoot)) {
+            git clone https://github.com/microsoft/vcpkg.git "$vcpkgRoot"
+          }
+          & "$vcpkgRoot\bootstrap-vcpkg.bat"
+          "VCPKG_ROOT=$vcpkgRoot" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
       - name: Install Inno Setup
         shell: pwsh
@@ -62,7 +67,10 @@ jobs:
           $installer = Get-ChildItem -Path $installerPattern -ErrorAction SilentlyContinue
           if (-not $installer) {
             Write-Error "Installer was not produced under $installerPattern"
+            exit 1
           }
+          Write-Host "Installer output:"
+          $installer | ForEach-Object { Write-Host " - $($_.FullName)" }
 
       - name: Upload installer artifact
         uses: actions/upload-artifact@v4
