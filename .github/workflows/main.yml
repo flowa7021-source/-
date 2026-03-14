@@ -1,0 +1,64 @@
+name: Windows Installer CI
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+env:
+  PROJECT_DIR: "G-claude-offline-document-viewer-LMq8A (5) (1)/G-claude-offline-document-viewer-LMq8A"
+
+jobs:
+  build-installer:
+    runs-on: windows-2022
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Setup vcpkg
+        shell: pwsh
+        run: |
+          git clone https://github.com/microsoft/vcpkg.git "$env:USERPROFILE\vcpkg"
+          & "$env:USERPROFILE\vcpkg\bootstrap-vcpkg.bat"
+          "VCPKG_ROOT=$env:USERPROFILE\vcpkg" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Install Inno Setup
+        shell: pwsh
+        run: choco install innosetup --no-progress -y
+
+      - name: Build release + installer
+        shell: pwsh
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: .\scripts\build.ps1 -Installer
+
+      - name: Verify installer exists
+        shell: pwsh
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: |
+          $installer = Get-ChildItem -Path .\build\installer\*.exe -ErrorAction SilentlyContinue
+          if (-not $installer) {
+            Write-Error "Installer was not produced under build/installer"
+          }
+
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: DocVision-setup-x64
+          path: ${{ env.PROJECT_DIR }}/build/installer/*.exe
+          if-no-files-found: error
+
+      - name: Publish installer to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.PROJECT_DIR }}/build/installer/*.exe
