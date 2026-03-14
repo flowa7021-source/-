@@ -1,0 +1,70 @@
+{
+    "hotkeys": [
+        {"command": "file.open",            "keys": "Ctrl+O",          "description": "Open file"},
+        {"command": "file.save",            "keys": "Ctrl+S",          "description": "Save"},
+        {"command": "file.saveAs",          "keys": "Ctrl+Shift+S",    "description": "Save as"},
+        {"command": "file.close",           "keys": "Ctrl+W",          "description": "Close tab"},
+        {"command": "file.closeAll",        "keys": "Ctrl+Shift+W",    "description": "Close all tabs"},
+        {"command": "file.print",           "keys": "Ctrl+P",          "description": "Print"},
+        {"command": "file.properties",      "keys": "Ctrl+D",         "description": "Document properties"},
+
+        {"command": "nav.nextPage",         "keys": "PageDown",        "description": "Next page"},
+        {"command": "nav.prevPage",         "keys": "PageUp",          "description": "Previous page"},
+        {"command": "nav.firstPage",        "keys": "Ctrl+Home",       "description": "First page"},
+        {"command": "nav.lastPage",         "keys": "Ctrl+End",        "description": "Last page"},
+        {"command": "nav.goToPage",         "keys": "Ctrl+G",          "description": "Go to page"},
+        {"command": "nav.back",             "keys": "Alt+Left",        "description": "Navigate back"},
+        {"command": "nav.forward",          "keys": "Alt+Right",       "description": "Navigate forward"},
+        {"command": "nav.nextTab",          "keys": "Ctrl+Tab",        "description": "Next tab"},
+        {"command": "nav.prevTab",          "keys": "Ctrl+Shift+Tab",  "description": "Previous tab"},
+
+        {"command": "zoom.in",              "keys": "Ctrl+Plus",       "description": "Zoom in"},
+        {"command": "zoom.out",             "keys": "Ctrl+Minus",      "description": "Zoom out"},
+        {"command": "zoom.actualSize",      "keys": "Ctrl+0",          "description": "Actual size (100%)"},
+        {"command": "zoom.fitWidth",        "keys": "Ctrl+1",          "description": "Fit width"},
+        {"command": "zoom.fitPage",         "keys": "Ctrl+2",          "description": "Fit page"},
+        {"command": "zoom.fitHeight",       "keys": "Ctrl+3",          "description": "Fit height"},
+
+        {"command": "view.singlePage",      "keys": "Ctrl+Shift+1",    "description": "Single page mode"},
+        {"command": "view.continuous",       "keys": "Ctrl+Shift+2",    "description": "Continuous scroll mode"},
+        {"command": "view.twoPages",        "keys": "Ctrl+Shift+3",    "description": "Two pages mode"},
+        {"command": "view.book",            "keys": "Ctrl+Shift+4",    "description": "Book mode"},
+        {"command": "view.pagesOverview",   "keys": "Ctrl+Shift+5",    "description": "Pages overview"},
+        {"command": "view.fullscreen",      "keys": "F11",             "description": "Full screen"},
+        {"command": "view.slideshow",       "keys": "F5",              "description": "Slide show"},
+        {"command": "view.sidePanel",       "keys": "F12",             "description": "Toggle side panel"},
+        {"command": "view.thumbnails",      "keys": "Ctrl+T",          "description": "Show thumbnails"},
+        {"command": "view.outline",         "keys": "Ctrl+B",          "description": "Show outline/bookmarks"},
+
+        {"command": "search.find",          "keys": "Ctrl+F",          "description": "Find text"},
+        {"command": "search.findNext",      "keys": "F3",              "description": "Find next"},
+        {"command": "search.findPrev",      "keys": "Shift+F3",        "description": "Find previous"},
+
+        {"command": "ocr.area",             "keys": "Ctrl+Shift+O",    "description": "OCR selected area"},
+        {"command": "ocr.page",             "keys": "Ctrl+Alt+O",      "description": "OCR current page"},
+
+        {"command": "screenshot.area",      "keys": "Ctrl+Alt+X",      "description": "Screenshot area"},
+        {"command": "copy.text",            "keys": "Ctrl+C",          "description": "Copy text"},
+        {"command": "copy.image",           "keys": "Ctrl+Shift+C",    "description": "Copy selection as image"},
+        {"command": "selectAll",            "keys": "Ctrl+A",          "description": "Select all"},
+
+        {"command": "annot.highlight",      "keys": "Ctrl+Shift+H",    "description": "Highlight tool"},
+        {"command": "annot.note",           "keys": "Ctrl+Shift+N",    "description": "Sticky note"},
+        {"command": "annot.ink",            "keys": "Ctrl+Shift+I",    "description": "Ink/draw tool"},
+        {"command": "annot.textbox",        "keys": "Ctrl+Shift+T",    "description": "Text box"},
+        {"command": "annot.hideToggle",     "keys": "Ctrl+Shift+A",    "description": "Show/hide annotations"},
+        {"command": "annot.delete",         "keys": "Delete",          "description": "Delete annotation"},
+
+        {"command": "page.rotateRight",     "keys": "Ctrl+Shift+R",    "description": "Rotate page right"},
+        {"command": "page.rotateLeft",      "keys": "Ctrl+Alt+R",      "description": "Rotate page left"},
+
+        {"command": "tool.hand",            "keys": "H",               "description": "Hand/pan tool"},
+        {"command": "tool.selectText",      "keys": "V",               "description": "Text selection tool"},
+        {"command": "tool.selectRect",      "keys": "R",               "description": "Rectangle selection tool"},
+
+        {"command": "app.commandPalette",   "keys": "Ctrl+Shift+P",    "description": "Command palette"},
+        {"command": "app.homeScreen",       "keys": "Ctrl+Shift+Home", "description": "Home screen"},
+        {"command": "app.settings",         "keys": "Ctrl+Comma",      "description": "Settings"},
+        {"command": "display.nightMode",    "keys": "Ctrl+Shift+D",    "description": "Toggle night mode"}
+    ]
+}

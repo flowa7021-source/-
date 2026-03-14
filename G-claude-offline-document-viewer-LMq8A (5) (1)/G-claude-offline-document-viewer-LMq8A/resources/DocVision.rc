@@ -1,0 +1,53 @@
+// DocVision Resource Script
+
+#include <windows.h>
+
+// Version information
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     0,1,0,0
+PRODUCTVERSION  0,1,0,0
+FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
+FILEFLAGS       0
+FILEOS          VOS_NT_WINDOWS32
+FILETYPE        VFT_APP
+FILESUBTYPE     VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName",      "DocVision Project\0"
+            VALUE "FileDescription",  "DocVision - Offline Document Viewer\0"
+            VALUE "FileVersion",      "0.1.0.0\0"
+            VALUE "InternalName",     "DocVision\0"
+            VALUE "LegalCopyright",   "AGPL-3.0 License\0"
+            VALUE "OriginalFilename", "DocVision.exe\0"
+            VALUE "ProductName",      "DocVision\0"
+            VALUE "ProductVersion",   "0.1.0.0\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+// Application icon (ID 1 = main icon shown in Explorer, taskbar, etc.)
+1 ICON "icons/docvision.ico"
+
+// Accelerator table
+IDR_ACCEL ACCELERATORS
+BEGIN
+    "O",        1900,   VIRTKEY, CONTROL                // Ctrl+O = Open
+    "S",        1901,   VIRTKEY, CONTROL                // Ctrl+S = Save
+    "W",        1903,   VIRTKEY, CONTROL                // Ctrl+W = Close tab
+    "F",        1300,   VIRTKEY, CONTROL                // Ctrl+F = Find
+    "G",        1204,   VIRTKEY, CONTROL                // Ctrl+G = Go to page
+    "P",        1800,   VIRTKEY, CONTROL                // Ctrl+P = Print
+    "C",        1500,   VIRTKEY, CONTROL                // Ctrl+C = Copy
+    VK_F11,     1006,   VIRTKEY                         // F11 = Full screen
+    VK_F5,      1007,   VIRTKEY                         // F5 = Slide show
+    VK_OEM_PLUS,1100,   VIRTKEY, CONTROL                // Ctrl+= = Zoom in
+    VK_OEM_MINUS,1101,  VIRTKEY, CONTROL                // Ctrl+- = Zoom out
+    "0",        1105,   VIRTKEY, CONTROL                // Ctrl+0 = Actual size
+END
