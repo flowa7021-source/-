@@ -133,7 +133,9 @@ Important: the workflow file must be in the repository root `.github/workflows/`
 
 Triggers:
 - `workflow_dispatch` (manual)
+- `push` to `main`/`master`/`work` (CI check runs)
 - git tags matching `v*`
+- `pull_request` (CI check runs)
 - published GitHub Release
 
 ## Portable distribution
