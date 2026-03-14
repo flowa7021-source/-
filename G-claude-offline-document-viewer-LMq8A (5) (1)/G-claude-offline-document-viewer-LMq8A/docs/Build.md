@@ -121,6 +121,8 @@ cpack -G ZIP          # Portable ZIP
 
 The repository includes a root workflow at `.github/workflows/windows-installer.yml` that runs the complete Windows packaging cycle:
 
+Important: the workflow file must be in the repository root `.github/workflows/` directory (nested `.github` folders are ignored by GitHub Actions).
+
 1. Checks out the repository and enters the project directory
 2. Bootstraps `vcpkg` and exposes `VCPKG_ROOT`
 3. Installs Inno Setup 6
