@@ -117,15 +117,21 @@ cpack -G ZIP          # Portable ZIP
 - 64-bit only, requires Windows 10+
 
 
-## GitHub Actions: automatic Windows installer
+## GitHub Actions: full installer pipeline
 
-The repository now includes a workflow at `.github/workflows/windows-installer.yml` that:
+The repository includes a root workflow at `.github/workflows/windows-installer.yml` that runs the complete Windows packaging cycle:
 
-1. Builds the project on `windows-2022` with vcpkg dependencies
-2. Compiles `installer/docvision.iss` via Inno Setup
-3. Uploads `build/installer/*.exe` as an artifact
+1. Checks out the repository and enters the project directory
+2. Bootstraps `vcpkg` and exposes `VCPKG_ROOT`
+3. Installs Inno Setup 6
+4. Runs `scripts/build.ps1 -Installer` (Release build + Inno Setup package)
+5. Uploads `build/installer/*.exe` as a workflow artifact
+6. Attaches the installer to GitHub Releases for tag/release runs
 
-It runs manually (`workflow_dispatch`) and automatically for version tags (`v*`).
+Triggers:
+- `workflow_dispatch` (manual)
+- git tags matching `v*`
+- published GitHub Release
 
 ## Portable distribution
 
